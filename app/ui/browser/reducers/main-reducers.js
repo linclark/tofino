@@ -18,13 +18,8 @@ import * as types from '../constants/action-types';
 import { State, Page } from '../model';
 import { isUUID } from '../browser-util';
 
-/**
- * Fairly sure we should hard code this
- */
-const HOME_PAGE = 'https://www.mozilla.org/';
-
 const initialState = new State({
-  pages: Immutable.List.of(new Page({ location: HOME_PAGE })),
+  pages: Immutable.List.of(new Page()),
   currentPageIndex: 0,
   pageAreaVisible: false,
 });
@@ -37,13 +32,9 @@ export default function basic(state = initialState, action) {
   switch (action.type) {
     case types.CREATE_TAB:
     case types.IPC_COMMAND_CREATE_TAB:
-      return createTab(state, action.location);
-
     case types.IPC_COMMAND_OPEN_BOOKMARK:
-      return createTab(state, action.bookmark.url);
-
     case types.IPC_COMMAND_SHOW_BOOKMARKS:
-      return createTab(state, 'atom://bookmarks');
+      return createTab(state, action.page);
 
     case types.IPC_COMMAND_FOCUS_URL_BAR:
       return state;
@@ -105,21 +96,28 @@ export function getPageAreaVisible(state) {
   return state.browserWindow.pageAreaVisible;
 }
 
-function createTab(state, location = HOME_PAGE) {
+function createTab(state, page) {
   return state.withMutations(mut => {
-    const page = new Page({ location });
     mut.update('pages', pages => pages.push(page));
     mut.set('currentPageIndex', state.pages.size);
     mut.set('pageAreaVisible', true);
   });
 }
 
+function duplicateTab(state, pageId) {
+  assert(isUUID(pageId), 'DUPLICATE_TAB requires a page id.');
+
+  const page = new Page({
+    location: state.pages.get(getPageIndexById(state, pageId)).location,
+  });
+  return createTab(state, page);
+}
+
 function attachTab(state, page) {
   assert(isUUID(page.id), 'ATTACH_TAB requires a page with valid id.');
 
   return state.withMutations(mut => {
-    const newPage = new Page(page);
-    mut.set('pages', Immutable.List.of(newPage));
+    mut.set('pages', Immutable.List.of(page));
     mut.set('currentPageIndex', 0);
   });
 }

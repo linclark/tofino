@@ -11,6 +11,7 @@ specific language governing permissions and limitations under the License.
 */
 
 import * as types from '../constants/action-types';
+import { Page } from '../model';
 
 export function createTab() {
   return { type: types.IPC_COMMAND_CREATE_TAB };
@@ -21,11 +22,13 @@ export function focusURLBar() {
 }
 
 export function showBookmarks() {
-  return { type: types.IPC_COMMAND_SHOW_BOOKMARKS };
+  const page = new Page({ location: 'atom://bookmarks' });
+  return { type: types.IPC_COMMAND_SHOW_BOOKMARKS, page };
 }
 
 export function openBookmark(bookmark) {
-  return { type: types.IPC_COMMAND_OPEN_BOOKMARK, bookmark };
+  const page = new Page({ location: bookmark });
+  return { type: types.IPC_COMMAND_OPEN_BOOKMARK, page };
 }
 
 export function closeTab(pageId) {
