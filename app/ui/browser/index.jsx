@@ -12,7 +12,7 @@ specific language governing permissions and limitations under the License.
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import Relay from 'react-relay';
 import { ipcRenderer } from '../../shared/electron';
 
 import App from './views/app';
@@ -32,12 +32,6 @@ if (BUILD_CONFIG.test) {
   ipcRenderer.store = store;
 }
 
-const chrome = (
-  <Provider store={store}>
-    <App />
-  </Provider>
-);
-
 const container = document.getElementById('browser-container');
 
 const onRender = () => ipcRenderer.send('window-ready');
@@ -48,6 +42,13 @@ const onRender = () => ipcRenderer.send('window-ready');
 // can't necessarily produce the resulting state (which is supposed to be the initial state
 // presented to the user).  Dispatching actions also uses the same codepaths the rest of the
 // application uses.
+ReactDOM.render(
+  <Relay.RootContainer
+    Component={App}
+    route={new AppHomeRoute()} />,
+  container,
+  onRender
+);
 
 const ws = new WebSocket(`${endpoints.UA_SERVICE_WS}/diffs`);
 
@@ -74,11 +75,11 @@ ws.on('message', (data, flags) => {
     }
     store.dispatch(actions.createTab());
 
-    ReactDOM.render(chrome, container, onRender);
+
 
     return;
   }
 
   // It's dangerous to trust the service in this way, but good enough for now.
   store.dispatch(command);
-});
+
