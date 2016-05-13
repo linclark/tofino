@@ -11,9 +11,8 @@ specific language governing permissions and limitations under the License.
 */
 
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
+import Relay from 'react-relay';
 import { ipcRenderer } from '../../../shared/electron';
-import * as selectors from '../selectors';
 
 import Style from '../browser-style';
 import BrowserWindow from './browser';
@@ -27,7 +26,6 @@ const App = function({ pages, profile, currentPageIndex, currentPage, dispatch }
   return (
     <div className={APP_STYLE}>
       <BrowserWindow ipcRenderer={ipcRenderer}
-        dispatch={dispatch}
         pages={pages}
         profile={profile}
         currentPageIndex={currentPageIndex}
@@ -44,16 +42,22 @@ App.propTypes = {
   profile: PropTypes.object.isRequired,
   currentPageIndex: PropTypes.number.isRequired,
   currentPage: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
 };
 
-function mapStateToProps(state) {
-  return {
-    pages: selectors.getPages(state),
-    profile: selectors.getProfile(state),
-    currentPageIndex: selectors.getCurrentPageIndex(state),
-    currentPage: selectors.getCurrentPage(state),
-  };
-}
+export default Relay.createContainer(App, {
+  fragments: {
+    viewer: () => Relay.QL`
+      fragment on User {
+        widgets(first: 10) {
+          edges {
+            node {
+              id,
+              name,
+            },
+          },
+        },
+      }
+    `,
+  },
+});
 
-export default connect(mapStateToProps)(Style.component(App));
