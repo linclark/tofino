@@ -46,6 +46,19 @@ if (BUILD_CONFIG.test) {
   ipcRenderer.store = store;
 }
 
+const ipcNetworkLayer = {
+  sendMutation(mutationRequest) {
+  },
+  sendQueries(requests) {
+    const request = requests[0];
+    return graphqlQuery(request);
+  },
+  supports(...options) {
+  },
+};
+
+Relay.injectNetworkLayer(ipcNetworkLayer);
+
 const chrome = (
   <Relay.RootContainer
     Component={App}
