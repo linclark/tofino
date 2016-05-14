@@ -22,18 +22,20 @@ const APP_STYLE = Style.registerStyle({
   height: '100%',
 });
 
-const App = function({ pages, profile, currentPageIndex, currentPage, dispatch }) {
-  return (
-    <div className={APP_STYLE}>
-      <BrowserWindow ipcRenderer={ipcRenderer}
-        pages={pages}
-        profile={profile}
-        currentPageIndex={currentPageIndex}
-        currentPage={currentPage} />
-      <Style.Element />
-    </div>
-  );
-};
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Widget list</h1>
+        <ul>
+          {this.props.viewer.widgets.edges.map(edge =>
+            <li key={edge.node.id}>{edge.node.name} (ID: {edge.node.id})</li>
+          )}
+        </ul>
+      </div>
+    );
+  }
+}
 
 App.displayName = 'App';
 
