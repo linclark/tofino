@@ -45,6 +45,8 @@ if (BUILD_CONFIG.test) {
   ipcRenderer.store = store;
 }
 
+import graphqlQuery from '../../main/graphql-server';
+
 const ipcNetworkLayer = {
   sendMutation(mutationRequest) {
   },
