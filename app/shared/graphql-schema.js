@@ -3944,7 +3944,7 @@ export default {
               "deprecationReason": null
             },
             {
-              "name": "text",
+              "name": "location",
               "description": null,
               "args": [],
               "type": {
@@ -7062,7 +7062,7 @@ export default {
           "fields": null,
           "inputFields": [
             {
-              "name": "text",
+              "name": "location",
               "description": null,
               "type": {
                 "kind": "SCALAR",
@@ -7174,7 +7174,7 @@ export default {
           "fields": null,
           "inputFields": [
             {
-              "name": "text",
+              "name": "location",
               "description": null,
               "type": {
                 "kind": "SCALAR",
@@ -7229,7 +7229,7 @@ export default {
           "fields": null,
           "inputFields": [
             {
-              "name": "text",
+              "name": "location",
               "description": null,
               "type": {
                 "kind": "SCALAR",

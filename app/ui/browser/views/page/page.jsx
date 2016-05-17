@@ -68,16 +68,13 @@ class Page extends Component {
     };
 
     return (
-      <div className={`page ${PAGE_STYLE} ${this.props.isActive ? 'active-browser-page' : ''}`}
-        data-page-state={this.props.page.state}>
-        <Search hidden={!this.props.page.isSearching} />
+      <div>
         <webview is="webview"
           ref="webview"
           class={`webview-${this.props.page.id} ${WEB_VIEW_STYLE}`}
           preload={'../../content/preload/content.js'}
           guestInstanceId={this.props.page.guestInstanceId}
           onContextMenu={requestContextData} />
-        <Status page={this.props.page} />
       </div>
     );
   }

@@ -22,20 +22,14 @@ const APP_STYLE = Style.registerStyle({
   height: '100%',
 });
 
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Widget list</h1>
-        <ul>
-          {this.props.viewer.allPages.edges.map(edge =>
-            <li key={edge.node.id}>(ID: {edge.node.id})</li>
-          )}
-        </ul>
-      </div>
-    );
-  }
-}
+const App = function(props) {
+  return (
+    <div className={APP_STYLE}>
+      <BrowserWindow ipcRenderer={ipcRenderer}
+        pages={props.viewer.allPages.edges} />
+    </div>
+  );
+};
 
 App.displayName = 'App';
 
@@ -56,7 +50,7 @@ export default Relay.createContainer(App, {
           edges {
             node {
               id,
-              complete
+              location
             },
           },
         },

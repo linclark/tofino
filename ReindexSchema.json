@@ -1,0 +1,40 @@
+[
+  {
+    name: "User",
+    kind: "OBJECT",
+    interfaces: [
+      "Node"
+    ],
+    fields: [
+      {
+        name: "id",
+        type: "ID",
+        nonNull: true,
+        unique: true
+      }
+    ]
+  },
+  {
+    name: "Page",
+    kind: "OBJECT",
+    interfaces: [
+      "Node"
+    ],
+    fields: [
+      {
+        name: "id",
+        type: "ID",
+        nonNull: true,
+        unique: true
+      },
+      {
+        name: "location",
+        type: "String"
+      },
+      {
+        name: "complete",
+        type: "Boolean"
+      }
+    ]
+  }
+]

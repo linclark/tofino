@@ -69,12 +69,12 @@ class BrowserWindow extends Component {
     } = this.props;
 
     const webViewController = this.webViewController;
-    const currentPageId = currentPage.id;
+    // const currentPageId = currentPage.id;
 
-    const navBack = () => webViewController.navigateBack(currentPageId);
-    const navForward = () => webViewController.navigateForward(currentPageId);
-    const navRefresh = () => webViewController.navigateRefresh(currentPageId);
-    const navigateTo = loc => webViewController.navigateTo(currentPageId, loc);
+    // const navBack = () => webViewController.navigateBack(currentPageId);
+    // const navForward = () => webViewController.navigateForward(currentPageId);
+    // const navRefresh = () => webViewController.navigateRefresh(currentPageId);
+    // const navigateTo = loc => webViewController.navigateTo(currentPageId, loc);
 
     const openMenu = () => menuBrowser(currentPage.sessionId, dispatch);
     const isBookmarked = (url) => profile.bookmarks.has(url);
@@ -111,26 +111,6 @@ class BrowserWindow extends Component {
     return (
       <div className={BROWSER_WINDOW_STYLE}>
         <div className={CHROME_AREA_STYLE}>
-          <NavBar page={currentPage}
-            {...{
-              navBack,
-              navForward,
-              navRefresh,
-              navigateTo,
-              minimize,
-              maximize,
-              close,
-              pages,
-              openMenu,
-              onLocationChange,
-              onLocationContextMenu,
-              onLocationReset,
-              isBookmarked,
-              bookmark,
-              unbookmark,
-              ipcRenderer,
-              profile,
-            }} />
           <TabBar handleTabClick={handleTabClick}
             handleTabClose={handleTabClose}
             handleTabContextMenu={handleTabContextMenu}
@@ -138,10 +118,10 @@ class BrowserWindow extends Component {
             {...this.props } />
         </div>
         <div className={CONTENT_AREA_STYLE}>
-          {pages.map((page, pageIndex) => (
-            <Page key={`page-${page.id}`}
+          {pages.map(({ node }, pageIndex) => (
+            <Page key={`page-${node.id}`}
               isActive={pageIndex === currentPageIndex}
-              page={page}
+              page={node}
               webViewController={webViewController}
               {...this.props} />
           ))}
