@@ -47,22 +47,25 @@ if (BUILD_CONFIG.test) {
   ipcRenderer.store = store;
 }
 
-import graphqlQuery from '../../main/graphql-server';
+//import graphqlQuery from '../../main/graphql-server';
 
-const ipcNetworkLayer = {
-  sendMutation(mutationRequest) {
-  },
-  sendQueries(requests) {
-    const request = requests[0];
-    return graphqlQuery(request);
-  },
-  supports(...options) {
-  },
-};
+// const ipcNetworkLayer = {
+//   sendMutation(mutationRequest) {
+//   },
+//   sendQueries(requests) {
+//     const request = requests[0];
+//     return graphqlQuery(request);
+//   },
+//   supports(...options) {
+//   },
+// };
 
-Relay.injectNetworkLayer(ipcNetworkLayer);
+//Relay.injectNetworkLayer(ipcNetworkLayer);
 
-const chrome = (
+import Reindex from './Reindex';
+Relay.injectNetworkLayer(Reindex.getRelayNetworkLayer());
+
+const ui = (
   <Relay.RootContainer
     Component={App}
     route={new AppHomeRoute()} />
@@ -81,7 +84,7 @@ store.dispatch(actions.createTab());
 
 // We start rendering before we connect to the UA service and before we receive the initial state so
 // that if an error occurs while we connect, we at least have some UI in place.
-ReactDOM.render(chrome, container);
+ReactDOM.render(ui, container);
 
 const ws = new WebSocket(`${endpoints.UA_SERVICE_WS}/diffs`);
 
