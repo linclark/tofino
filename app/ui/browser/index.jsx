@@ -27,6 +27,7 @@ window.onerror = (_message, _source, _lineno, _colno, _error) => {
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import Relay from 'react-relay';
 
 import App from './views/app';
 import configureStore from './store/store';
@@ -34,6 +35,7 @@ import * as actions from './actions/main-actions';
 import * as profileDiffs from '../../shared/profile-diffs';
 import BUILD_CONFIG from '../../../build-config';
 import * as endpoints from '../../shared/constants/endpoints';
+import AppHomeRoute from './routes/AppHomeRoute'
 
 import WebSocket from 'ws';
 
@@ -61,9 +63,9 @@ const ipcNetworkLayer = {
 Relay.injectNetworkLayer(ipcNetworkLayer);
 
 const chrome = (
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <Relay.RootContainer
+    Component={App}
+    route={new AppHomeRoute()} />
 );
 
 const container = document.getElementById('browser-container');
