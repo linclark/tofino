@@ -26,7 +26,9 @@ const App = function(props) {
   return (
     <div className={APP_STYLE}>
       <BrowserWindow ipcRenderer={ipcRenderer}
-        pages={props.viewer.allPages.edges} />
+        pages={props.viewer.allPages.edges}
+        currentPageIndex={props.viewer.allBrowserWindows.edges[0].node.currentPageIndex} />
+      <Style.Element />
     </div>
   );
 };
@@ -40,7 +42,7 @@ App.propTypes = {
   currentPage: PropTypes.object.isRequired,
 };
 
-export default Relay.createContainer(App, {
+export default Relay.createContainer(Style.component(App), {
   fragments: {
     viewer: () => {
       return Relay.QL`
@@ -54,6 +56,13 @@ export default Relay.createContainer(App, {
             },
           },
         },
+        allBrowserWindows(first: 1) {
+          edges {
+            node {
+              currentPageIndex
+            },
+          },
+        }
       }
     `},
   },

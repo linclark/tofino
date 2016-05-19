@@ -592,6 +592,60 @@ export default {
               },
               "isDeprecated": false,
               "deprecationReason": null
+            },
+            {
+              "name": "getBrowserWindow",
+              "description": "Get an object of type `BrowserWindow` by ID.",
+              "args": [
+                {
+                  "name": "id",
+                  "description": "id of BrowserWindow",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "ID",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "BrowserWindow",
+                "ofType": null
+              },
+              "isDeprecated": true,
+              "deprecationReason": "Use `browserWindowById`."
+            },
+            {
+              "name": "browserWindowById",
+              "description": "Get an object of type `BrowserWindow` by `id`",
+              "args": [
+                {
+                  "name": "id",
+                  "description": "`id` of `BrowserWindow`",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "ID",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "BrowserWindow",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
           ],
           "inputFields": null,
@@ -673,6 +727,11 @@ export default {
             {
               "kind": "OBJECT",
               "name": "Page",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "BrowserWindow",
               "ofType": null
             }
           ]
@@ -1068,6 +1127,59 @@ export default {
               "type": {
                 "kind": "OBJECT",
                 "name": "_PageConnection",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "allBrowserWindows",
+              "description": "A connection with all objects of type `BrowserWindow`",
+              "args": [
+                {
+                  "name": "first",
+                  "description": "Number of edges to include from the beginning of the result.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "last",
+                  "description": "Number of edges to include from the end of the result.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "before",
+                  "description": "Only return edges before given cursor.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Cursor",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "after",
+                  "description": "Only return edges after given cursor.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Cursor",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "_BrowserWindowConnection",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -4020,6 +4132,161 @@ export default {
         },
         {
           "kind": "OBJECT",
+          "name": "_BrowserWindowConnection",
+          "description": "This is a generated Connection for BrowserWindow.\n\nConnection is a pattern from Relay.\nIt's a specification, designed to make management of ordered collections easier,\nwhen pagination and ordering is required. Reindex uses Connections for linking\n`Node` types and for providing an interface to retrieving all objects of some\ntype.\n\n* [Reindex docs: Connection\n](https://reindex)\n* [Relay docs: Connections\n](https://facebook.github.io/relay/docs/graphql-connections.html#content)\n",
+          "fields": [
+            {
+              "name": "count",
+              "description": "The total number of elements in the connection.\n",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "nodes",
+              "description": "A plain list of BrowserWindow objects without the _BrowserWindowEdge wrapper object.",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "BrowserWindow",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "edges",
+              "description": "A list of edges included in the connection.",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "_BrowserWindowEdge",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "pageInfo",
+              "description": "Information about if there are any more elements before or after the current\nslice.\n",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PageInfo",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "BrowserWindow",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "currentPageIndex",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "Node",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "_BrowserWindowEdge",
+          "description": "This is a generated Edge for BrowserWindow.\n\nEdges are elements of `edges` list of Connections.\n\n* [Reindex docs: Connection\n](https://reindex)\n* [Relay docs: Connections\n](https://facebook.github.io/relay/docs/graphql-connections.html#content)\n",
+          "fields": [
+            {
+              "name": "cursor",
+              "description": "The opaque string-like object, that points to the current node. To be used with\n`before` and `after` arguments of the Connection field.\n",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Cursor",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "node",
+              "description": "The ${type.name} object wrapped by this edge.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "BrowserWindow",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "ReindexIntercomSettings",
           "description": "INTERNAL",
           "fields": [
@@ -4659,6 +4926,114 @@ export default {
               "type": {
                 "kind": "OBJECT",
                 "name": "_PagePayload",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createBrowserWindow",
+              "description": "Creates a new `BrowserWindow` object",
+              "args": [
+                {
+                  "name": "input",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "_CreateBrowserWindowInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "_BrowserWindowPayload",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateBrowserWindow",
+              "description": "Updates the given `BrowserWindow` object. The given fields are merged to the existing object.",
+              "args": [
+                {
+                  "name": "input",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "_UpdateBrowserWindowInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "_BrowserWindowPayload",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "replaceBrowserWindow",
+              "description": "Replaces the given `BrowserWindow` object with a new one.",
+              "args": [
+                {
+                  "name": "input",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "_ReplaceBrowserWindowInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "_BrowserWindowPayload",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deleteBrowserWindow",
+              "description": "Deletes the given `BrowserWindow` object",
+              "args": [
+                {
+                  "name": "input",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "_DeleteBrowserWindowInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "_BrowserWindowPayload",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -7280,6 +7655,233 @@ export default {
         {
           "kind": "INPUT_OBJECT",
           "name": "_DeletePageInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "clientMutationId",
+              "description": "The client mutation ID used by clients like Relay to track the mutation. If given, returned in the response payload of the mutation.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "id",
+              "description": "The ID of the deleted object.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "_CreateBrowserWindowInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "currentPageIndex",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "clientMutationId",
+              "description": "The client mutation ID used by clients like Relay to track the mutation. If given, returned in the response payload of the mutation.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "_BrowserWindowPayload",
+          "description": "The payload returned from mutations of `BrowserWindow`.\n\n* [Reindex docs: Mutations\n](https://www.reindex.io/docs/graphql-api/mutations/)\n",
+          "fields": [
+            {
+              "name": "clientMutationId",
+              "description": "The client mutation ID used by clients like Relay to track the mutation. If given, returned in the response payload of the mutation.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "id",
+              "description": "The ID of the mutated object.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "viewer",
+              "description": "The global viewer object. Can be used in the client to add\na newly created object to the connection of all objects of\nthe type.\n\nE.g. when creating a BrowserWindow object, you can add it\nto `viewer.allBrowserWindows` using the following Relay\nmutation config:\n```javascript\n{\n  type: 'RANGE_ADD',\n  parentID: this.props.viewer.id,\n  connectionName: 'allBrowserWindows',\n  edgeName: 'changedBrowserWindowEdge',\n  rangeBehaviors: {\n    '': 'prepend',\n  },\n}\n```\n",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "ReindexViewer",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "changedBrowserWindow",
+              "description": "The mutated object.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "BrowserWindow",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "changedBrowserWindowEdge",
+              "description": "A connection edge containing the mutated object. Can be used to add a newly\ncreated object to a connection in Relay.\n",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "_BrowserWindowEdge",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "_UpdateBrowserWindowInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "currentPageIndex",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "clientMutationId",
+              "description": "The client mutation ID used by clients like Relay to track the mutation. If given, returned in the response payload of the mutation.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "id",
+              "description": "The ID of the updated object.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "_ReplaceBrowserWindowInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "currentPageIndex",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "clientMutationId",
+              "description": "The client mutation ID used by clients like Relay to track the mutation. If given, returned in the response payload of the mutation.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "id",
+              "description": "The ID of the replaced object.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "_DeleteBrowserWindowInput",
           "description": null,
           "fields": null,
           "inputFields": [

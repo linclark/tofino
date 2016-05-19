@@ -111,6 +111,22 @@ class BrowserWindow extends Component {
     return (
       <div className={BROWSER_WINDOW_STYLE}>
         <div className={CHROME_AREA_STYLE}>
+          <NavBar page={currentPage}
+            {...{
+              minimize,
+              maximize,
+              close,
+              pages,
+              openMenu,
+              onLocationChange,
+              onLocationContextMenu,
+              onLocationReset,
+              isBookmarked,
+              bookmark,
+              unbookmark,
+              ipcRenderer,
+              profile,
+            }} />
           <TabBar handleTabClick={handleTabClick}
             handleTabClose={handleTabClose}
             handleTabContextMenu={handleTabContextMenu}
