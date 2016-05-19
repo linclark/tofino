@@ -29,9 +29,13 @@ const NEW_TAB_BUTTON_STYLE = Style.registerStyle({
   color: '#555',
 });
 
+
+let handleTabContextMenu = () => {};
+let handleNewTabClick = () => {};
+let handleTabClick = () => {};
+let handleTabClose = () => {};
 const TabBar = ({
-  pages, currentPageIndex,
-  handleTabContextMenu, handleNewTabClick, handleTabClick, handleTabClose,
+  pages, currentPageIndex
 }) => (
   <div id="browser-tabbar"
     className={TABBAR_STYLE}>
