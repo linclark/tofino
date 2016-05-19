@@ -10,9 +10,11 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
 */
 
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Relay from 'react-relay';
 import { ipcRenderer } from '../../../shared/electron';
+import AddPageMutation from '../mutations/AddPageMutation';
+import Btn from './navbar/btn';
 
 import Style from '../browser-style';
 import BrowserWindow from './browser';
@@ -22,15 +24,29 @@ const APP_STYLE = Style.registerStyle({
   height: '100%',
 });
 
-const App = function(props) {
-  return (
-    <div className={APP_STYLE}>
-      <BrowserWindow ipcRenderer={ipcRenderer}
-        pages={props.viewer.allPages.edges}
-        currentPageIndex={props.viewer.allBrowserWindows.edges[0].node.currentPageIndex} />
-      <Style.Element />
-    </div>
-  );
+let gViewer;
+
+class App extends Component {
+  handleNewTabClick = () => {
+    debugger
+    Relay.Store.commitUpdate(
+      new AddPageMutation({
+        viewer: this.props.viewer
+      }),
+    );
+  }
+
+  render() {
+    return (
+      <div className={APP_STYLE}>
+        <div onClick={this.handleNewTabClick}>test</div>
+        <BrowserWindow ipcRenderer={ipcRenderer}
+          pages={this.props.viewer.allPages.edges}
+          currentPageIndex={this.props.viewer.allBrowserWindows.edges[0].node.currentPageIndex} />
+        <Style.Element />
+      </div>
+    )
+  }
 };
 
 App.displayName = 'App';
@@ -47,6 +63,7 @@ export default Relay.createContainer(Style.component(App), {
     viewer: () => {
       return Relay.QL`
       fragment on ReindexViewer {
+        ${AddPageMutation.getFragment('viewer')},
         allPages(first: 10) {
           count,
           edges {

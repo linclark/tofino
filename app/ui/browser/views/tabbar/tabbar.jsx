@@ -11,6 +11,7 @@ specific language governing permissions and limitations under the License.
 */
 
 import React, { PropTypes } from 'react';
+import Relay from 'react-relay';
 
 import Style from '../../browser-style';
 import Tab from './tab';
@@ -29,14 +30,13 @@ const NEW_TAB_BUTTON_STYLE = Style.registerStyle({
   color: '#555',
 });
 
-
 let handleTabContextMenu = () => {};
-let handleNewTabClick = () => {};
 let handleTabClick = () => {};
 let handleTabClose = () => {};
 const TabBar = ({
-  pages, currentPageIndex
-}) => (
+  pages, currentPageIndex,
+}) => {
+  return (
   <div id="browser-tabbar"
     className={TABBAR_STYLE}>
 
@@ -50,24 +50,14 @@ const TabBar = ({
         onClose={handleTabClose(page.id)} />
       )
     )}
-
-    <Btn className={`new-tab ${NEW_TAB_BUTTON_STYLE}`}
-      title="Add new tab"
-      clickHandler={handleNewTabClick}>
-      <i className="fa fa-plus" />
-    </Btn>
   </div>
-);
+)};
 
 TabBar.displayName = 'TabBar';
 
 TabBar.propTypes = {
   pages: PropTypes.object.isRequired,
   currentPageIndex: PropTypes.number.isRequired,
-  handleTabClick: PropTypes.func.isRequired,
-  handleTabClose: PropTypes.func.isRequired,
-  handleNewTabClick: PropTypes.func.isRequired,
-  handleTabContextMenu: PropTypes.func.isRequired,
 };
 
 export default TabBar;

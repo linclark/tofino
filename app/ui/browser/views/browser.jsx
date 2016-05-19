@@ -43,7 +43,7 @@ class BrowserWindow extends Component {
 
   render() {
     const {
-      currentPage, ipcRenderer, dispatch, profile, pages, currentPageIndex,
+      currentPage, ipcRenderer, dispatch, profile, pages, currentPageIndex, viewer,
     } = this.props;
 
     const webViewController = this.webViewController;
